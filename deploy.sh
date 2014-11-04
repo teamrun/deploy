@@ -75,6 +75,8 @@ do
 
         # send email and tell error or success this
         echo "gonna send email: \n deploy return: $depolyResult, msg: $errMsg"
+        nodeArgs="--result=$depolyResult --msg=$errMsg"
+        node sendMail.js nodeArgs
     fi
 
     sleep 300
