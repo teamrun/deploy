@@ -31,9 +31,9 @@
 按如下规则配置好您的邮件:
 
     module.exports = {
-        sender: 'libertyartchen@gmail.com',
-        pass: 'wofei1314ageha',
-        receiver: "chenllos@163.com"
+        sender: 'foo@gmail.com',
+        pass: 'pass',
+        receiver: "bar@163.com"
     };
 
 程序在检测到有localConfig后就会读取.
