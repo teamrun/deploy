@@ -86,7 +86,7 @@ do
         node "$shellPath/sendMail.js" $mailArgs
     fi
 
-    sleep 180
-    # sleep 300
+    # sleep 180
+    sleep 300
     # sleep 600
 done

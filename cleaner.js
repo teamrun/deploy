@@ -19,7 +19,7 @@ var appFolder = {
 }
 
 var CURRENT_REMAIN = 3;
-var BACKUP_REMAIN = 5;
+var BACKUP_REMAIN = 10;
 
 function getChildrenByOrder(parent, order){
     // 文件夹也是file
