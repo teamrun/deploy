@@ -10,6 +10,9 @@ var EP = require('eventproxy');
 var util = require('./util');
 
 var param = util.getCmdParam();
+
+// console.log(param);
+
 var appFolder = {
     current: path.resolve(param.appPath, 'current'),
     backup: path.resolve(param.appPath, 'backup')

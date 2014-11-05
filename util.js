@@ -1,3 +1,6 @@
+var fs = require('fs');
+var path = require('path');
+
 var util = {
     getCmdParam: function(){
         var param = {};
@@ -28,6 +31,25 @@ var util = {
             }
         });
         return result;
+    },
+    // e 暂不支持coffee
+    requireIfExits: function(absPath){
+        var extname = path.extname(absPath);
+        absPath = ( extname == '.js')? absPath : absPath + '.js';
+        // console.log(absPath);
+        var exists = fs.existsSync(absPath);
+        if(!exists){
+            return {
+                exists: false
+            };
+        }
+        else{
+            var m = require(absPath);
+            return {
+                exists: true,
+                m: m
+            };
+        }
     }
 };
 

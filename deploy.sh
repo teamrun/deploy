@@ -1,5 +1,7 @@
 #!/bin/sh
 
+shellPath=`pwd`
+
 app="/Users/chenllos/Documents/dev/LIB/tt"
 track="$app/track"
 current="$app/current"
@@ -8,6 +10,7 @@ backup="$app/backup"
 running="$app/running"
 appFilePath="$running/app.js"
 
+# 设定 部署结果为1时 表示成功, 这点和shell执行的process exit code不一样
 depolyResult=0
 errMsg=""
 
@@ -24,7 +27,7 @@ function softLinkTo(){
 # *********************  部署脚本的流程  *********************
 while true
 do
-    echo '\n\n\n ---------------------------------------------- \n'
+    echo '\n ----------------------------------------------'
     curTime=`date "+%Y-%m-%d %H:%M:%S"`
     cd $track
     repoStatus=`git pull`
@@ -74,10 +77,16 @@ do
 
 
         # send email and tell error or success this
-        echo "gonna send email: \n deploy return: $depolyResult, msg: $errMsg"
-        nodeArgs="--result=$depolyResult --msg=$errMsg"
-        node sendMail.js nodeArgs
+        echo "gonna clean and send email: \n deploy return: $depolyResult, msg: $errMsg"
+
+        cleanArgs="--appPath=$app"
+        node "$shellPath/cleaner.js" $cleanArgs
+
+        mailArgs="--result=$depolyResult --appPath=$app --msg=$errMsg  --cleanRes=$?"
+        node "$shellPath/sendMail.js" $mailArgs
     fi
 
-    sleep 300
+    sleep 180
+    # sleep 300
+    # sleep 600
 done
